@@ -8,6 +8,7 @@ Un estudio de códigos QR con identidad propia. HTML, CSS y JavaScript, sin fram
 - Colores sólidos y degradados, fondo transparente, cinco paletas, seis formas de puntos y tres estilos de esquinas.
 - Logo o foto central con tamaño ajustable y procesamiento local.
 - Marcos con mensaje personalizado.
+- Sección opcional «Floral · bodas»: acuarela romántica, ramitos y corona botánica; paletas, nombres, mensajes, tamaño y colores editables. Acceso directo: `/#bodas`.
 - Descarga PNG, SVG, JPG y WebP, entre 128 y 4096 píxeles.
 - Diseños guardados en localStorage e importación/exportación de proyectos JSON editables.
 - Interfaz en español, responsive, navegación por teclado y mensajes de validación.
@@ -55,8 +56,11 @@ Se utiliza corrección de errores H y margen de seguridad. La comprobación de l
 - `styles.css`: diseño y adaptación móvil.
 - `app.js`: controles, generación, exportaciones y biblioteca local.
 - `core.js`: formatos de contenido, validación y lectura segura de proyectos.
+- `floral.js`: plantillas de boda, composiciones vectoriales y acuarelas incrustadas en la exportación.
 - `assets/vendor/qr-code-styling.js`: [qr-code-styling 1.9.2](https://github.com/kozakdenys/qr-code-styling).
 - `assets/vendor/jsQR.js`: [jsQR 1.4.0](https://github.com/cozmo/jsQR), Apache 2.0.
 - `vercel.json`: configuración de hosting estático y cabeceras.
 
 El código del proyecto se distribuye bajo la licencia MIT. Las bibliotecas de terceros conservan sus licencias en `assets/vendor/qr-code-styling.LICENSE` y `assets/vendor/jsQR.LICENSE`.
+
+Las dos ilustraciones de `assets/floral/` provienen del repositorio de invitación del propietario y conservan sus derechos originales; consulta `assets/floral/ATTRIBUTION.md`. La acuarela conserva sus colores originales; ramitos y corona permiten recolorear las flores. El contenido codificado siempre queda separado de la decoración. Cuando el lector no reconoce la composición completa, se comprueba también el área central y se indica que acerques la cámara al código. La versión SVG incrusta las acuarelas para que el archivo sea autónomo; estas ilustraciones conservan su resolución raster, mientras que el QR, los textos, los ramitos y la corona son vectoriales.

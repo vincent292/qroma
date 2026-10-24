@@ -8,7 +8,7 @@ export const types = [
   {id:'contact',label:'Contacto',title:'Tarjeta de contacto',icon:'contact'},
   {id:'location',label:'Ubicación',title:'Ubicación',icon:'pin'}
 ];
-export const defaults = () => ({type:'url',fields:{url:{url:'https://ejemplo.com'},text:{text:''},phone:{phone:''},whatsapp:{phone:'',message:''},email:{email:'',subject:'',message:''},wifi:{ssid:'',password:'',security:'WPA',hidden:false},contact:{name:'',surname:'',company:'',phone:'',email:'',url:''},location:{latitude:'',longitude:''}},foreground:'#183e36',secondary:'#46786a',background:'#ffffff',gradient:false,transparent:false,dots:'rounded',corners:'extra-rounded',margin:8,logo:'',logoName:'',logoSize:22,frame:'none',frameText:'ESCANÉAME',size:1200,format:'png'});
+export const defaults = () => ({type:'url',fields:{url:{url:'https://ejemplo.com'},text:{text:''},phone:{phone:''},whatsapp:{phone:'',message:''},email:{email:'',subject:'',message:''},wifi:{ssid:'',password:'',security:'WPA',hidden:false},contact:{name:'',surname:'',company:'',phone:'',email:'',url:''},location:{latitude:'',longitude:''}},foreground:'#183e36',secondary:'#46786a',background:'#ffffff',gradient:false,transparent:false,dots:'rounded',corners:'extra-rounded',margin:8,logo:'',logoName:'',logoSize:22,frame:'none',frameText:'ESCANÉAME',flowerColor:'#cf94a0',leafColor:'#81977d',accentColor:'#b69560',floralStyle:'bouquets',floralSize:100,weddingNames:'',size:1200,format:'png'});
 export const escapeWifi = value => String(value).replace(/([\\;,:" ])/g,match=>match===' '?' ':('\\'+match));
 const vcard = value => String(value || '').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/;/g,'\\;').replace(/,/g,'\\,');
 const phone = value => String(value).replace(/[\s().-]/g,'');
@@ -39,11 +39,13 @@ export function sanitizeProject(raw){
   if(types.some(t=>t.id===src.type))s.type=src.type;
   for(const type of types)for(const key of Object.keys(s.fields[type.id])){const val=src.fields?.[type.id]?.[key];if(typeof s.fields[type.id][key]==='boolean')s.fields[type.id][key]=val===true;else if(typeof val==='string')s.fields[type.id][key]=val.slice(0,5000)}
   if(!['WPA','WEP','nopass'].includes(s.fields.wifi.security))s.fields.wifi.security='WPA';
-  for(const k of ['foreground','secondary','background'])if(/^#[a-f0-9]{6}$/i.test(src[k]))s[k]=src[k];
+  for(const k of ['foreground','secondary','background','flowerColor','leafColor','accentColor'])if(/^#[a-f0-9]{6}$/i.test(src[k]))s[k]=src[k];
   for(const k of ['gradient','transparent'])s[k]=src[k]===true;
-  for(const [k,values] of Object.entries({dots:['rounded','dots','square','extra-rounded','classy','classy-rounded'],corners:['square','extra-rounded','dot'],frame:['none','simple','label'],format:['png','svg','jpeg','webp']}))if(values.includes(src[k]))s[k]=src[k];
+  for(const [k,values] of Object.entries({dots:['rounded','dots','square','extra-rounded','classy','classy-rounded'],corners:['square','extra-rounded','dot'],frame:['none','simple','label','floral'],floralStyle:['bouquets','wreath','watercolor'],format:['png','svg','jpeg','webp']}))if(values.includes(src[k]))s[k]=src[k];
   for(const [k,min,max] of [['margin',8,16],['logoSize',12,28],['size',128,4096]])if(Number.isFinite(src[k]))s[k]=Math.round(Math.min(max,Math.max(min,src[k])));
   if(typeof src.frameText==='string')s.frameText=src.frameText.slice(0,28);
+  s.floralSize=Number.isFinite(src.floralSize)?Math.round(Math.min(120,Math.max(75,src.floralSize))):100;
+  if(typeof src.weddingNames==='string')s.weddingNames=src.weddingNames.slice(0,40);
   if(typeof src.logo==='string'&&/^data:image\/(png|jpeg|webp);base64,[a-z0-9+/=]+$/i.test(src.logo)&&src.logo.length<7500000)s.logo=src.logo;
   if(typeof src.logoName==='string')s.logoName=src.logoName.slice(0,100);
   return s;

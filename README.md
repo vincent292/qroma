@@ -11,6 +11,7 @@ Un estudio de códigos QR con identidad propia. HTML, CSS y JavaScript, sin fram
 - Descarga PNG, SVG, JPG y WebP, entre 128 y 4096 píxeles.
 - Diseños guardados en localStorage e importación/exportación de proyectos JSON editables.
 - Interfaz en español, responsive, navegación por teclado y mensajes de validación.
+- Comprobación de lectura local sobre la vista previa, con aviso si un estilo no se decodifica.
 
 ## Usar localmente
 
@@ -40,13 +41,13 @@ Los siguientes pushes a la rama de producción se desplegarán automáticamente 
 
 ## Privacidad y alcance
 
-La biblioteca QR está incluida en `assets/vendor`, con su licencia MIT, y no se carga desde un CDN. Los datos y las imágenes se procesan en el navegador. Las tipografías se solicitan a Google Fonts; si prefieres una aplicación completamente sin solicitudes externas, elimina el `@import` de `styles.css` o aloja las fuentes localmente. El diseño incluye fuentes de respaldo.
+Las bibliotecas de generación y lectura QR están incluidas en `assets/vendor`, con sus licencias, y no se cargan desde un CDN. Los datos y las imágenes se procesan en el navegador. Las tipografías se solicitan a Google Fonts; si prefieres una aplicación completamente sin solicitudes externas, elimina el `@import` de `styles.css` o aloja las fuentes localmente. El diseño incluye fuentes de respaldo.
 
 Los diseños se guardan en este navegador **solo al pulsar Guardar**. Exportar el proyecto incluye sus datos y su imagen, por lo que conviene guardar los proyectos Wi-Fi en un lugar privado. No hay analítica ni cuentas de usuario.
 
 Se generan QR **estáticos**. El contenido de un QR ya impreso no cambia. Para cambiar su destino después, codifica una URL/redirección que administres. Las imágenes centrales decoran el QR; para compartir una foto o PDF como destino debes alojar el archivo y usar su enlace público.
 
-Se utiliza corrección de errores H y margen de seguridad. La advertencia de contraste es orientativa; no garantiza lectura con todas las cámaras. Prueba el archivo exportado en varios teléfonos antes de imprimir, especialmente con logos, transparencias o degradados. JPG utiliza fondo sólido.
+Se utiliza corrección de errores H y margen de seguridad. La comprobación de lectura usa jsQR sobre la vista previa a 600 px; no garantiza lectura del archivo exportado con todas las cámaras. Los estilos de esquinas circulares pueden fallar en algunos lectores: el estudio avisa si no puede confirmar el contenido. Prueba el archivo exportado en varios teléfonos antes de imprimir, especialmente con logos, transparencias o degradados. JPG utiliza fondo sólido.
 
 ## Archivos
 
@@ -55,6 +56,7 @@ Se utiliza corrección de errores H y margen de seguridad. La advertencia de con
 - `app.js`: controles, generación, exportaciones y biblioteca local.
 - `core.js`: formatos de contenido, validación y lectura segura de proyectos.
 - `assets/vendor/qr-code-styling.js`: [qr-code-styling 1.9.2](https://github.com/kozakdenys/qr-code-styling).
+- `assets/vendor/jsQR.js`: [jsQR 1.4.0](https://github.com/cozmo/jsQR), Apache 2.0.
 - `vercel.json`: configuración de hosting estático y cabeceras.
 
-El código del proyecto se distribuye bajo la licencia MIT. La biblioteca de terceros conserva su propia licencia en `assets/vendor/qr-code-styling.LICENSE`.
+El código del proyecto se distribuye bajo la licencia MIT. Las bibliotecas de terceros conservan sus licencias en `assets/vendor/qr-code-styling.LICENSE` y `assets/vendor/jsQR.LICENSE`.

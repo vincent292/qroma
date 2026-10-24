@@ -9,7 +9,7 @@ export const types = [
   {id:'location',label:'Ubicación',title:'Ubicación',icon:'pin'}
 ];
 export const defaults = () => ({type:'url',fields:{url:{url:'https://ejemplo.com'},text:{text:''},phone:{phone:''},whatsapp:{phone:'',message:''},email:{email:'',subject:'',message:''},wifi:{ssid:'',password:'',security:'WPA',hidden:false},contact:{name:'',surname:'',company:'',phone:'',email:'',url:''},location:{latitude:'',longitude:''}},foreground:'#183e36',secondary:'#46786a',background:'#ffffff',gradient:false,transparent:false,dots:'rounded',corners:'extra-rounded',margin:8,logo:'',logoName:'',logoSize:22,frame:'none',frameText:'ESCANÉAME',size:1200,format:'png'});
-export const escapeWifi = value => String(value).replace(/([\\;,:" ])/g,'\\$1');
+export const escapeWifi = value => String(value).replace(/([\\;,:" ])/g,match=>match===' '?' ':('\\'+match));
 const vcard = value => String(value || '').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/;/g,'\\;').replace(/,/g,'\\,');
 const phone = value => String(value).replace(/[\s().-]/g,'');
 export function payload(state) {
